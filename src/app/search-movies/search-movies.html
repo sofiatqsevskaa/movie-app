@@ -1,0 +1,21 @@
+<p>movie works!</p>
+
+<div class="search-bar">
+  <input
+    type="text"
+    #searchBox
+    placeholder="Search movies..."
+    (keyup.enter)="searchMovies(searchBox.value)" />
+</div>
+
+@if (loading) {
+  <div class="loading">Loading...</div>
+} @else {
+  <div class="movies-grid">
+    @for (movie of movies; track movie.imdbID) {
+      <a class="movie-card" [routerLink]="['/movie', movie.imdbID]">
+        <div class="movie-title">{{ movie.Title }}</div>
+      </a>
+    }
+  </div>
+}
