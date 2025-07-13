@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Movie } from '../model/movie';
 
 @Injectable({
     providedIn: 'root',
@@ -11,8 +12,9 @@ export class OmdbService {
 
     constructor(private http: HttpClient) { }
 
-    searchMovies(title: string): Observable<any> {
-        return this.http.get(this.apiUrl, {
+    searchMovies(title: string): Observable<{ Search: Movie[]; totalResults: string; Response: string }> {
+        console.log(`Searching for movies with title: ${title}`);
+        return this.http.get<{ Search: Movie[]; totalResults: string; Response: string }>(this.apiUrl, {
             params: {
                 apikey: this.apiKey,
                 s: title,
@@ -20,8 +22,8 @@ export class OmdbService {
         });
     }
 
-    getMovieDetails(imdbID: string): Observable<any> {
-        return this.http.get(this.apiUrl, {
+    getMovieDetails(imdbID: string): Observable<Movie> {
+        return this.http.get<Movie>(this.apiUrl, {
             params: {
                 apikey: this.apiKey,
                 i: imdbID,

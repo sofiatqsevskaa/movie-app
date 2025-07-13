@@ -1,1 +1,24 @@
-<p>movie-details works!</p>
+@if (movie) {
+<main>
+    <h1>{{ movie.Title }}</h1>
+    <div class="movie-details-container">
+        <img [src]="movie.Poster" alt="{{ movie.Title }}" />
+
+        <div class="movie-info">
+            <p>Year: {{ movie.Year }}</p>
+            <p>Rated: {{ movie.Rated }}</p>
+            <p>Released: {{ movie.Released }}</p>
+            <p>Runtime: {{ movie.Runtime }}</p>
+            <p>Genre: {{ movie.Genre }}</p>
+            <p>Director: {{ movie.Director }}</p>
+            <p>Writer: {{ movie.Writer }}</p>
+            <p>Actors: {{ movie.Actors }}</p>
+            <p>Plot: {{ movie.Plot }}</p>
+            <p>Language: {{ movie.Language }}</p>
+            <p>Country: {{ movie.Country }}</p>
+            <p>Awards: {{ movie.Awards }}</p>
+            <p>Rating: {{ movie.imdbRating }} &#9733;</p>
+        </div>
+    </div>
+</main>
+}

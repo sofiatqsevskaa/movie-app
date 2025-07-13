@@ -1,21 +1,24 @@
-<p>movie works!</p>
-
 <div class="search-bar">
-  <input
-    type="text"
-    #searchBox
-    placeholder="Search movies..."
-    (keyup.enter)="searchMovies(searchBox.value)" />
+    <input type="text" #searchBox placeholder="Search movies..." (input)="searchMovies(searchBox.value)" />
 </div>
 
-@if (loading) {
-  <div class="loading">Loading...</div>
-} @else {
-  <div class="movies-grid">
-    @for (movie of movies; track movie.imdbID) {
-      <a class="movie-card" [routerLink]="['/movie', movie.imdbID]">
-        <div class="movie-title">{{ movie.Title }}</div>
-      </a>
+<div class="movies-grid">
+    @for (movie of movies$ | async; track movie.imdbID) {
+    @if (movie.Poster !== 'N/A') {
+    <a class="movie-card" [routerLink]="['/details', movie.imdbID]">
+        <div class="movie-poster">
+            <img [src]="movie.Poster" alt="{{ movie.Title }}" width="100" />
+        </div>
+        <div class="movie-text">
+            <div class="movie-title">{{ movie.Title }}</div>
+            <div class="movie-year">{{ movie.Year }}</div>
+            <div class="movie-runtime">{{ movie.Runtime }}</div>
+            <div class="movie-genre">{{ movie.Genre }}</div>
+            <div class="movie-rating">
+                <span class="movie-rating">{{ movie.imdbRating }}</span><span class="star"> &#9733;</span>
+            </div>
+        </div>
+    </a>
     }
-  </div>
-}
+    }
+</div>
